@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<constant name="struts.custom.i18n.resources" value="memu"></constant>
+
+<package name="default" namespace="/" extends="struts-default,json-default">
+ <action name="AddTypeAction" class="AddTypeAction"> 
+ <interceptor-ref name="tokenSession"></interceptor-ref>
+ <interceptor-ref name="basicStack"></interceptor-ref>
+ 	<result name="success">/AdminFunction/addType.jsp</result>
+ 	<result name="error">/AdminFunction/addType.jsp</result>	 
+ </action>
+ 
+ <action name="Login" class="LoginAction">
+ <result name="success" type="redirectAction">
+ <param name="actionName">monthReport</param>
+ </result>
+ <result name="error">/index.jsp</result>
+ </action>
+ 
+ <action name="Logout" class="Logout">
+ <result name="success" >
+ /index.jsp
+ </result>
+ </action>
+ <action name="index">
+ <result  >
+  /index.jsp
+ </result>
+ </action>
+ <action name="ProfitReport" class="ProfitReportSelectAction">
+ <result name="success">
+ /User/profit.jsp
+ </result>
+ </action>
+ <action name="yearReport" class="YearReportSelectAction">
+ <result   name="success" >
+  /User/yearReport.jsp
+ </result>
+ </action>
+ 
+ <action name="monthReport" class="MonthReportSelectAction">
+ <result   name="success" >
+  /User/monthReport.jsp
+ </result>
+ </action>
+ 
+ <action name="SpendTypeAction" class="SpendTypeAction">
+   <result name="success" >/AdminFunction/addType.jsp</result>
+ </action>
+ 
+ <action name="Expense" class="ExpenseAction">
+ <!-- <interceptor-ref name="completeStack" /> -->
+ 	<result name="success">/AdminFunction/detail.jsp</result>
+ </action>
+ 
+ <action name="InCome"  class="IncomeAction">
+ <result name="success">
+ /AdminFunction/income.jsp
+ </result>
+ </action>
+ <action name="VerifyPage" class="VerifyPageAction">
+ <result>
+ /VerifyPage.jsp
+ </result>
+ </action>
+ <action name="AccountManager"  >
+ <result>
+ /AdminFunction/accountManager.jsp
+ </result>
+ </action>
+ <action name="IncomeSumAction" class="IncomeSumAction">
+ <result name="success" type="json"></result>
+ </action>
+ <action name="IncomeUpdateAction" class="IncomeUpdateAction">
+ <result name="success" type="json"></result>
+ </action>
+ 
+ <action name="IncomeDeleteAction" class="IncomeDeleteAction">
+ <result name="success" type="json"></result>
+ </action>
+ <action name="IncomeCreateAction" class="IncomeCreateAction">
+<result name="success" type="json"></result>
+ </action>
+ 
+ <action name="IncomeAccountSelectAction" class="IncomeAccountSelectAction">
+ 
+ <result name="success" type="json"></result>
+ </action>
+ <action name="IncomeQueryAction" class="IncomeQueryAction">
+ <result name="success" type="json"></result>
+ </action>
+ <action name="ExpendsDataAction" class="ExpendsDataAction">
+ 	<result name="success" type="json">
+ 	</result>
+ </action>
+ <action name="UpdateSpendTypeAction" class="UpdateSpendTypeAction">
+  <result name="success" type="json"></result>
+ </action>
+ <action name="DeleteSpendTypeAction" class="DeleteSpendType">
+ <result name="success" type="json"></result>
+ </action>
+ <action name="SpendTypeDataAction" class="SpendTypeDataAction">
+ 	<result name="success" type="json"></result>
+ </action>
+ <action name="CreatExpendsDataAction" class="CreatExpendsDataAction">
+ <result name="success" type="json"></result>
+ </action>
+ 
+ <action name="SpendTypeSelectAction" class="SpendTypeSelectAction">
+ <result name="success" type="json"></result>
+ </action>
+
+ <action name="DeleteExpendsDataAction" class="DeleteExpendsDataAction">
+ <result name="success" type="json"></result>
+ </action>
+ 
+ <action name="UpdateExpendsDataAction" class="UpdateExpendsDataAction">
+  <result name="success" type="json"></result>
+ </action>
+ 
+ <action name="YearReportAction" class="YearReportAction">
+  <result name="success" type="json"></result>
+ </action>
+ <action name="MonthReportAction" class="MonthReportAction">
+ <result name="success" type="json"></result>
+ </action>
+ <action name="ProfitReportAction" class="ProfitReportAction">
+ <result name="success" type="json"></result>
+ </action>
+  <action name="ProfitReportSumAction" class="ProfitReportSumm">
+ <result name="success" type="json"></result>
+ </action>
+ <action name="AccountList" class="AccountManagerAction">
+ <result name="success" type="json"></result>
+ </action>
+ <action name="AccountCreate" class="AccountCreateAction">
+ <result name="success" type="json"></result>
+ </action>
+ <action name="AccountDelete" class="AccountDeleteAction">
+ <result name="success" type="json"></result>
+ </action>
+ <action name="AccountUpdate" class="AccountUpdateAction">
+ <result name="success" type="json"></result>
+ </action>
+ <action name="AccountWebServcie" class="AccountWebService">
+ <result name="success" type="json"></result>
+ </action>
+</package>
+</struts>    

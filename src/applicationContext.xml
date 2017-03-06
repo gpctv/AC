@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:hibernate.cfg.xml">
+		</property>
+		<property name="hibernateProperties">
+            <props>
+            	
+                 <prop key="minPoolSize"  >1</prop>
+                 <prop key="maxIdleTime">60</prop>
+                 <prop key="maxPoolSize"  >3</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+	</bean>
+	<bean id="SpendItemDAO" class="bean.SpendItemDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AddTypeImp" class="biz.AddTypeImp">
+        <property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="spendItem">
+			<ref bean="SpendItem"></ref>
+		</property>
+		<property name="spendItemDao">
+		<ref bean="SpendItemDAO"></ref>
+		</property>
+		
+    </bean>
+  
+	<bean id="SpendItem" class="bean.SpendItem">
+	</bean>  
+	
+	<bean id="AddTypeAction" class="action.AddTypeAction">
+	<property name="addTypeimp">
+	 <ref bean="AddTypeImp"/>
+	</property>
+	</bean>
+	
+	<bean id="SpendTypeImp" class="biz.SpendTypeImp">
+	   <property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	<property name="spendItem">
+			<ref bean="SpendItem"></ref>
+		</property>
+		<property name="spendItemDao">
+		<ref bean="SpendItemDAO"></ref>
+		</property>
+	</bean>
+	<bean id="SpendTypeAction" class="action.SpendTypeAction">
+	
+	
+	</bean>
+		
+	<bean id="SpendTypeDataAction" class="action.SpendTypeDataAction">
+	<property name="spendItemDao">
+			<ref bean="SpendItemDAO" />
+		</property>
+	</bean>
+	<bean id="SpendTypeOptionImp" class="biz.SpendTypeOptionImp">
+	<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	
+	</bean>
+	<bean id="UpdateSpendTypeAction" class="action.UpdateSpendTypeAction">
+		<property name="spendItemDao">
+			<ref bean="SpendItemDAO" />
+		</property>
+	<property name="spendItem">
+			<ref bean="SpendItem"></ref>
+		</property>
+		<property name="spendTypeImp">
+			<ref bean="SPendTypeImp"></ref>
+		</property>
+	</bean>
+	<bean id="DeleteSpendType" class="action.DeleteSpendType">
+	<property name="spendItem">
+			<ref bean="SpendItem"></ref>
+		</property>
+		<property name="spendTypeImp">
+			<ref bean="SPendTypeImp"></ref>
+		</property>
+	</bean>
+	
+	<bean id="SpendTypeSelectAction" class="action.SpendTypeSelectAction">
+	<property name="spendTypeOptionImp">
+			<ref bean="SpendTypeOptionImp" />
+		</property>
+	
+	</bean>
+	<bean id="SPendTypeImp" class="biz.SpendTypeImp">
+	<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	<property name="spendItemDao">
+			<ref bean="SpendItemDAO" />
+		</property>
+	<property name="spendItem">
+			<ref bean="SpendItem"></ref>
+		</property>
+	
+	</bean>
+	
+	<bean id="ExpenseDAO" class="bean.ExpenseDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="Expense" class="bean.Expense">
+	</bean>
+	
+	<bean id="ExpendsDataAction" class="action.ExpendsDataAction">
+	<property name="expense">
+			<ref bean="Expense" />
+		</property>
+		<property name="expenseDao">
+			<ref bean="ExpenseDAO" />
+		</property>
+		<property name="expendsDataImp">
+			<ref bean="ExpendsDataImp" />
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="CreatExpendsDataAction" class="action.CreatExpendsDataAction">
+	<property name="expense">
+			<ref bean="Expense" />
+	</property>
+	<property name="expenseDataImp">
+			<ref bean="ExpendsDataImp" />
+	</property>
+	
+	</bean>
+	
+	<bean id="ExpendsDataImp" class="biz.ExpendsDataImp">
+	<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	<property name="expense">
+			<ref bean="Expense" />
+		</property>
+		<property name="expenseDao">
+			<ref bean="ExpenseDAO" />
+		</property>
+	</bean>
+	
+	<bean id="DeleteExpendsDataAction" class="action.DeleteExpendsDataAction">
+	<property name="expense">
+			<ref bean="Expense" />
+		</property>
+	<property name="expenseDataImp">
+			<ref bean="ExpendsDataImp" />
+	</property>
+	
+	</bean>
+	 
+	 <bean name="UpdateExpendsDataAction" class="action.UpdateExpendsDataAction">
+	 <property name="expense">
+			<ref bean="Expense" />
+		</property>
+	<property name="expenseDataImp">
+			<ref bean="ExpendsDataImp" />
+	</property>
+	 
+	 </bean>
+	 
+	<bean id="ExpenseAction" class="action.ExpenseAction">
+	<property name="expenseDataImp">
+			<ref bean="ExpendsDataImp" />
+	</property>
+	</bean>
+	<bean id="AccountDAO" class="bean.AccountDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="Account" class="bean.Account">
+	</bean>
+	<bean id="AccountBizImp" class="biz.AccountBizImp">
+	 <property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="account">
+			<ref bean="Account" />
+		</property>
+		<property name="accountDao">
+			<ref bean="AccountDAO" />
+		</property>
+	</bean>
+	<bean id="AccountCreateAction" class="action.AccountCreateAction">
+	 <property name="accountBizImp">
+			<ref bean="AccountBizImp" />
+		</property>
+		<property name="aaccount">
+			<ref bean="Account" />
+		</property>
+		 
+	</bean>
+	<bean id="AccountDeleteAction" class="action.AccountDeleteAction">
+	 <property name="accountBizImp">
+			<ref bean="AccountBizImp" />
+		</property>
+		<property name="aaccount">
+			<ref bean="Account" />
+		</property>
+		 
+	</bean>
+	<bean id="AccountUpdateAction" class="action.AccountUpdateAction">
+	<property name="accountBizImp">
+			<ref bean="AccountBizImp" />
+		</property>
+		<property name="aaccount">
+			<ref bean="Account" />
+		</property>
+	</bean>
+	<bean id="AccountManagerAction" class="action.AccountManagerAction">
+	<property name="accountBizImp">
+			<ref bean="AccountBizImp" />
+		</property>
+	
+	</bean>
+	
+	<bean id="LoginBizImp" class="biz.LoginBizImp">
+	  <property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="accountDao">
+			<ref bean="AccountDAO" />
+		</property>
+		<property name="account">
+			<ref bean="Account" />
+		</property>
+	
+	</bean>
+	<bean id="LoginAction" class="action.LoginAction">
+	 <property name="loginBizImp">
+			<ref bean="LoginBizImp" />
+		</property>
+	<property name="accountName">
+			<ref bean="Account" />
+		</property>
+		
+	</bean>
+	<bean id="Logout" class="action.LogoutAction">
+	
+	</bean>
+	<bean id="IncomeDAO" class="bean.IncomeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	 <bean id="Income" class="bean.Income">
+	 </bean>
+	 
+	<bean id="IncomeAction" class="action.IncomeAction">
+		<property name="incomeBizImp">
+			<ref bean="IncomeBizImp" />
+		</property>
+	</bean>
+	<bean id="IncomeDeleteAction" class="action.IncomDeleteAction">
+		<property name="incomeBizImp">
+	<ref bean="IncomeBizImp"></ref>
+	</property>
+	<property name="income">
+			<ref bean="Income" />
+		</property>
+	</bean>
+	<bean id="IncomeUpdateAction" class="action.IncomeUpdateAction">
+		<property name="incomeBizImp">
+	<ref bean="IncomeBizImp"></ref>
+	</property>
+	<property name="income">
+			<ref bean="Income" />
+		</property>
+	</bean>
+	 <bean id="IncomeBizImp" class="biz.IncomeBizImp">
+	 <property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	  <property name="incomeDao">
+			<ref bean="IncomeDAO" />
+		</property>
+		<property name="income">
+			<ref bean="Income" />
+		</property>
+	 </bean>
+	<bean id="IncomeQueryAction" class="action.IncomeQueryAction">
+	<property name="incomeBizImp">
+	<ref bean="IncomeBizImp"></ref>
+	</property>
+	
+	</bean>
+	
+	<bean id="IncomeAccountSelectAction" class="action.IncomeAccountSelectAction">
+	<property name="incomeBizImp">
+	<ref bean="IncomeBizImp"></ref>
+	</property>
+	
+	</bean>
+	<bean id="IncomeCreateAction" class="action.IncomeCreateAction">
+	<property name="incomeBizImp">
+	<ref bean="IncomeBizImp"></ref>
+	</property>
+	<property name="income">
+			<ref bean="Income" />
+		</property>
+	</bean>
+	<bean id="IncomeSumAction" class="action.IncomeSumAction">
+	<property name="incomeBizImp">
+			<ref bean="IncomeBizImp" />
+		</property>
+	</bean>
+ <bean id="YearReportAction" class="action.YearReportAction">
+ <property name="yearReportBiz">
+			<ref bean="YearReportBiz" />
+		</property>
+ 
+ </bean>
+ <bean id="YearReportBiz" class="biz.YearReportBiz">
+ <property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+ </bean>
+ 
+ <bean id="YearReportSelectAction" class="action.YearReportSelectAction">
+ <property name="yearReportBiz">
+			<ref bean="YearReportBiz" />
+		</property>
+ </bean>
+ 
+ <bean id="MonthReportAction" class="action.MonthReportAction">
+ <property name="monthReportBiz">
+			<ref bean="MonthReportBiz" />
+		</property>
+ 
+ </bean>
+ <bean id="MonthReportSelectAction" class="action.MonthReportSelectAction">
+ <property name="monthReportBiz">
+			<ref bean="MonthReportBiz" />
+		</property>
+ </bean>
+	<bean id="MonthReportBiz" class="biz.MonthReportBiz">
+	<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProfitDAO" class="bean.ProfitDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="Profit" class="bean.Profit">
+	</bean>
+	<bean id="ProfitId" class="bean.ProfitId">
+	</bean>
+	
+	<bean id="ProfitBiz" class="biz.ProfitBiz">
+	<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="profitDao">
+			<ref bean="ProfitDAO" />
+		</property>
+		<property name="profit">
+			<ref bean="Profit" />
+		</property>
+		<property name="profitId">
+			<ref bean="ProfitId" />
+		</property>
+		
+	</bean>
+	
+	 <bean id="ProfitReportSelectAction" class="action.ProfitReportSelectAction">
+	 
+		<property name="profitBiz">
+			<ref bean="ProfitBiz" />
+		</property>
+	</bean>
+	<bean id="ProfitReportAction" class="action.ProfitReportAction">
+	
+		<property name="profitBiz">
+			<ref bean="ProfitBiz" />
+		</property>
+	</bean>
+	 <bean id="ProfitReportSumm" class="action.ProfitReportSummaryAction">
+	
+		<property name="profitBiz">
+			<ref bean="ProfitBiz" />
+		</property>
+	</bean>
+	<bean id="VerifyRecapthca" class="biz.VerifyRecaptcha">
+	</bean>
+	<bean id="VerifyPageAction" class="action.VerifyPageAction">
+	<property name="verifyRecaptcha">
+			<ref bean="VerifyRecapthca" />
+		</property>
+	</bean>
+	<bean id="AccountWebServiceBiz" class="biz.AccountWebServiceBiz">
+	<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AccountWebService" class="action.AccountWebService">
+	
+	<property name="accountService">
+			<ref bean="AccountWebServiceBiz" />
+		</property>
+	</bean>
+	</beans>
