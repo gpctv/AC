@@ -1,0 +1,17 @@
+language: java
+sudo: false
+install: true
+addons:
+  sonarqube:
+    organization: "gpctv-github"
+    token:
+      secure: "01c4cfcb10e89617c168e254022f4d8afd49cefd"
+jdk:
+  - oraclejdk8
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+      
